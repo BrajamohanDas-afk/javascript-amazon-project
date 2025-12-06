@@ -7,7 +7,7 @@ import {products,getProduct} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
-
+import { renderPaymentSummary } from './paymentSummary.js';
 //this is how i exporte form the extenal liberies like dayjs
 // const today = dayjs();
 // const deliveryDate = today.add(7,'days');
@@ -120,12 +120,12 @@ export function renderOrderSummary(){
       link.addEventListener('click', () => {
         const productId = link.dataset.productId;
         removeFromCart(productId);
-
         const container = document.querySelector(
           `.js-cart-item-container-${productId}`
         );
         container.remove();
         updateCartQuantity();
+        renderPaymentSummary();
       });
     });
 
@@ -184,6 +184,7 @@ export function renderOrderSummary(){
         const {productId, deliveryOptionId} = element.dataset;
         updateDeliveryOption(productId, deliveryOptionId);
         renderOrderSummary();
+        renderPaymentSummary();
       });
     });
 };
