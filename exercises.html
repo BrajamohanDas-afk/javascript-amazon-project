@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
+        
+        function isWeekEnd(){
+            const today = dayjs();
+            const dayOfWeek = today.format('dddd');
+            if(dayOfWeek === 'Saturday' || dayOfWeek === 'Sunday'){
+                console.log('today is a weekend');
+            }else{
+                console.log('today is not a weekend');
+            }
+        }
+
+        isWeekEnd();
+        </script>
+    </body>
+</html>
