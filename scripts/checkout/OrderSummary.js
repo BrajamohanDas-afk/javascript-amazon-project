@@ -158,17 +158,9 @@ export function renderOrderSummary(){
         }
         updateQuantity(productId, newQuantity);
         
-        const container = document.querySelector(
-          `.js-cart-item-container-${productId}`
-        );
-        container.classList.remove('is-editing-quantity');
-
-        const quantityLabel = document.querySelector(
-          `.js-quantity-label-${productId}`
-        );
-        quantityLabel.innerHTML = newQuantity;
-
+        renderOrderSummary();
         renderCheckoutHeader();
+        renderPaymentSummary();
       })
     })
 
