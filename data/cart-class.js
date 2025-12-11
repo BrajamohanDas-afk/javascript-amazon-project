@@ -1,6 +1,6 @@
 class Cart{
-    cartItem = undefined; //this is how to add a property to the cart
-    localStorageKey = undefined;
+    cartItem; //this is how to add a property to the cart
+    localStorageKey;
 
     loadFromStorage(){
     this.cartItem = JSON.parse(localStorage.getItem(this.localStorageKey));
