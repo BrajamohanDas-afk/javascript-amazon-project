@@ -1,9 +1,15 @@
 class Cart{
     cartItem; //this is how to add a property to the cart
-    localStorageKey;
+    #localStorageKey;  // private property a we put # in front of it
 
-    loadFromStorage(){
-    this.cartItem = JSON.parse(localStorage.getItem(this.localStorageKey));
+    constructor(loadFromStorageKey){
+        this.#localStorageKey = loadFromStorageKey;
+        this.#loadFromStorage();
+    };
+
+    // so we can also make the methordes private property too  by placing a # infornt of it
+    #loadFromStorage(){
+    this.cartItem = JSON.parse(localStorage.getItem(this.#localStorageKey));
     if (!this.cartItem) {
         this.cartItem = [{
         productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
@@ -16,9 +22,9 @@ class Cart{
         }];
     }
     }
-
+    
     saveToStorage() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItem));
+    localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItem));
     }
     addToCart(productId) {
     let matchingItem;
@@ -114,11 +120,7 @@ class Cart{
 const cart = new Cart('cart-oop');
 const businessCart = new Cart('cart-business');
 
-cart.localStorageKey = 'cart-oop'
-businessCart.localStorageKey = 'cart-business'
 
-cart.loadFromStorage();
-businessCart.loadFromStorage();
 
 console.log(cart);
 console.log(businessCart);
