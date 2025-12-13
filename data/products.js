@@ -82,7 +82,23 @@ const tshirt = new clothing({
   sizeChartLink: "images/clothing-size-chart.png"
 }) 
 
-console.log(tshirt);
+// const data = new Date();
+// console.log(Date());
+
+// function logThis (){
+//   console.log(this);
+// }
+// logThis();
+// logThis.call('hello');
+
+this
+const object3 = {
+  method: () =>{
+    console.log(this);
+  }
+};
+
+object3.method();
 
 export const products = [
   {
