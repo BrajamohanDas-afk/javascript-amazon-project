@@ -12,7 +12,7 @@ export function getProduct(productId){
   return matchingProduct;
 }
 
-class Product{
+export class Product{
   id;
   image;
   name;
@@ -43,7 +43,7 @@ class Product{
 };
 //extends means that Clothing will get all the properties of Product
 //this is also know as inheritance-let us reuse code between classes 
-class clothing extends Product{
+export class Clothing extends Product{
   sizeChartLink;
 
   constructor(productDetails){
@@ -64,7 +64,7 @@ class clothing extends Product{
 
 };
 
-const tshirt = new clothing({
+const tshirt = new Clothing({
   id: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
   image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
   name: "Adults Plain Cotton T-Shirt - 2 Pack",
@@ -91,14 +91,39 @@ const tshirt = new clothing({
 // logThis();
 // logThis.call('hello');
 
-this
-const object3 = {
-  method: () =>{
-    console.log(this);
+// this
+// const object3 = {
+//   method: () =>{
+//     console.log(this);
+//   }
+// };
+
+// object3.method();
+
+export class Appliance extends Product {
+  instructionsLink;
+  warrantyLink;
+
+  constructor(productDetails){
+    super(productDetails);
+    this.instructionsLink = productDetails.instructionsLink;
+    this.warrantyLink = productDetails.warrantyLink;
   }
+
+  extraInfoHtml(){
+    //this call one of the parents methords
+    //super.extraInfoHtml();
+    return `
+    <a href="${this.instructionsLink}" target = "_blank">
+      Instructions
+    </a>
+    <a href="${this.warrantyLink}" target = "_blank">
+      Warranty
+    </a>
+    `;
+  };
 };
 
-object3.method();
 
 export const products = [
   {
@@ -160,7 +185,10 @@ export const products = [
       "toaster",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: 'appliance',
+    instructionsLink: 'images/appliance-instructions.png',
+    warrantyLink: 'images/appliance-warranty.png'
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -763,8 +791,10 @@ export const products = [
 // map is like we take each value in an array we run this function on it to transfrom it to the new value
 .map((productDetails)=>{
   if(productDetails.type === 'clothing'){
-    return new clothing(productDetails);
-  };
+    return new Clothing(productDetails);
+  } else if(productDetails.type === 'appliance'){
+    return new Appliance(productDetails);
+  }
 
   return new Product(productDetails);
 });   
