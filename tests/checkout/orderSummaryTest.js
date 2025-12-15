@@ -1,6 +1,6 @@
 import {renderOrderSummary} from '../../scripts/checkout/OrderSummary.js'
 import {loadFromStorage, cart} from '../../data/cart.js';
-import { loadProducts } from '../../data/products.js';
+import { loadProducts, loadProductsFetch } from '../../data/products.js';
 
 describe('test suite: renderOrderSummary', () => {
     const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6'; 
@@ -9,7 +9,8 @@ describe('test suite: renderOrderSummary', () => {
     
     //like beforeEach beforeAll is also a type of hook
     beforeAll((done)=>{
-      loadProducts(()=>{
+      loadProductsFetch()
+      .then(()=>{
         //done() let us controll when to go to the next step
         done();
       });

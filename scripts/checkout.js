@@ -5,19 +5,13 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 // import '../data/cart-class.js'
 // import '../data/car.js'
 // import '../data/backend-practice.js'
-import { loadProducts } from "../data/products.js";
+import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
 //it let us run multiple promise al at the same time
 //an in this promise we run all the thing at the same time
 Promise.all([
-    new Promise ((resolve)=>{
-    console.log('start promise')
-    loadProducts(()=>{
-        console.log('finish loading');
-        resolve('value1');
-    });
-    }),
+    loadProductsFetch(),
     new Promise((resolve)=>{
         loadCart(()=>{
             resolve();
