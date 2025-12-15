@@ -1,10 +1,20 @@
 import {renderOrderSummary} from '../../scripts/checkout/OrderSummary.js'
 import {loadFromStorage, cart} from '../../data/cart.js';
+import { loadProducts } from '../../data/products.js';
 
 describe('test suite: renderOrderSummary', () => {
     const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6'; 
     const productId2 = '15b6fc6f-327a-4ec4-896f-486349e85a3d'; 
 
+    
+    //like beforeEach beforeAll is also a type of hook
+    beforeAll((done)=>{
+      loadProducts(()=>{
+        //done() let us controll when to go to the next step
+        done();
+      });
+    });
+    
     //this is a hook it will run befour each of our test
     beforeEach(()=>{
     spyOn(localStorage, 'setItem');
