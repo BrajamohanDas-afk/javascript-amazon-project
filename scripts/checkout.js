@@ -6,9 +6,62 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 // import '../data/car.js'
 // import '../data/backend-practice.js'
 import { loadProducts } from "../data/products.js";
+import { loadCart } from "../data/cart.js";
 
-loadProducts(()=>{
+//it let us run multiple promise al at the same time
+//an in this promise we run all the thing at the same time
+Promise.all([
+    new Promise ((resolve)=>{
+    console.log('start promise')
+    loadProducts(()=>{
+        console.log('finish loading');
+        resolve('value1');
+    });
+    }),
+    new Promise((resolve)=>{
+        loadCart(()=>{
+            resolve();
+        });
+    })
+
+])
+.then((values)=>{
+    console.log(values);
     renderCheckoutHeader();
     renderOrderSummary();
     renderPaymentSummary();
 });
+
+
+
+//in this promise we do this step by step 
+// new Promise ((resolve)=>{
+//     console.log('start promise')
+//     loadProducts(()=>{
+//         console.log('finish loading');
+//         resolve('value1');
+//     });
+// })
+// //To add next step we use .then
+// .then((value)=>{
+//     return new Promise((resolve)=>{
+//         loadCart(()=>{
+//             resolve();
+//         });
+//     });
+// })
+// .then(()=>{
+//     renderCheckoutHeader();
+//     renderOrderSummary();
+//     renderPaymentSummary();
+// });
+
+
+// loadProducts(()=>{
+//     loadCart(()=>{
+//     renderCheckoutHeader();
+//     renderOrderSummary();
+//     renderPaymentSummary();
+
+//     })
+// });
