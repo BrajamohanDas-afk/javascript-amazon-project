@@ -22,7 +22,7 @@ async function loadPage(){
         // throw 'error2';
         loadCart(()=>{
             // reject('error3')
-            // resolve('value-3');
+            resolve('value-3');
         });
     })
     }catch(error){
