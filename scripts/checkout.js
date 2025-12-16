@@ -8,6 +8,24 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 import { loadProducts, loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
+
+async function loadPage(){
+
+    await loadProductsFetch();
+    
+    await new Promise((resolve)=>{
+        loadCart(()=>{
+            resolve();
+        });
+    })
+
+    renderCheckoutHeader();
+    renderOrderSummary();
+    renderPaymentSummary();
+}
+loadPage()
+
+/*
 //it let us run multiple promise al at the same time
 //an in this promise we run all the thing at the same time
 Promise.all([
@@ -25,37 +43,38 @@ Promise.all([
     renderOrderSummary();
     renderPaymentSummary();
 });
+*/
+
+/*
+in this promise we do this step by step 
+new Promise ((resolve)=>{
+    console.log('start promise')
+    loadProducts(()=>{
+        console.log('finish loading');
+        resolve('value1');
+    });
+})
+//To add next step we use .then
+.then((value)=>{
+    return new Promise((resolve)=>{
+        loadCart(()=>{
+            resolve();
+        });
+    });
+})
+.then(()=>{
+    renderCheckoutHeader();
+    renderOrderSummary();
+    renderPaymentSummary();
+});
 
 
+loadProducts(()=>{
+    loadCart(()=>{
+    renderCheckoutHeader();
+    renderOrderSummary();
+    renderPaymentSummary();
 
-//in this promise we do this step by step 
-// new Promise ((resolve)=>{
-//     console.log('start promise')
-//     loadProducts(()=>{
-//         console.log('finish loading');
-//         resolve('value1');
-//     });
-// })
-// //To add next step we use .then
-// .then((value)=>{
-//     return new Promise((resolve)=>{
-//         loadCart(()=>{
-//             resolve();
-//         });
-//     });
-// })
-// .then(()=>{
-//     renderCheckoutHeader();
-//     renderOrderSummary();
-//     renderPaymentSummary();
-// });
-
-
-// loadProducts(()=>{
-//     loadCart(()=>{
-//     renderCheckoutHeader();
-//     renderOrderSummary();
-//     renderPaymentSummary();
-
-//     })
-// });
+    })
+});
+*/
