@@ -10,14 +10,24 @@ import { loadCart } from "../data/cart.js";
 
 
 async function loadPage(){
-
+    //in try() we will put the code which can in future
+    //throw an error  
+    //if in try any error are not coming then it will not go to catch
+    try {
+        //when u put throw it will directly go the catch
+        //it also help us to manually throw an error
+        // throw 'error1';
     await loadProductsFetch();
-    
-    await new Promise((resolve)=>{
+    const value = await new Promise((resolve, reject)=>{
+        // throw 'error2';
         loadCart(()=>{
-            resolve();
+            // reject('error3')
+            // resolve('value-3');
         });
     })
+    }catch(error){
+        console.log('unexpected error. Please try again later'); 
+    }
 
     renderCheckoutHeader();
     renderOrderSummary();

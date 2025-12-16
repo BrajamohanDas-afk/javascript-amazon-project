@@ -142,12 +142,19 @@ export function loadProductsFetch(){
     }
 
     return new Product(productDetails);
-    });
+    })
 
     console.log('load products');
-  });
+  })
+  //is a method available on Promise objects that 
+  // registers a callback function to be executed 
+  // when the promise is rejected.
+  // there are other way to use this for async await
+  // .catch((error)=>{
+  //     console.log('unexpected error. Please try again later');  
+  // });
   return promise;
-}
+};
 // loadProductsFetch().then(()=>{
 //   console.log('next step');
 // });
@@ -173,9 +180,14 @@ export function loadProducts(fun){
     fun();
   });
 
-  xhr.open('GET', 'https://supersimplebackend.dev/products')
+  xhr.addEventListener('error',(error)=>{
+    console.log('unexpected error. Please try again later');
+  });
+
+  xhr.open('GET', 'https://error.supersimplebackend.dev/products')
   xhr.send();
 };
+
 
 /*
 export const products = [
