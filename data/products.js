@@ -135,7 +135,9 @@ export function loadProductsFetch(){
     .map((productDetails)=>{
     if(productDetails.type === 'clothing'){
       return new Clothing(productDetails);
-    } else if(productDetails.type === 'appliance'){
+    } else if(productDetails.keywords.includes('appliances')) {
+      productDetails.instructionsLink = 'images/appliance-instructions.png';
+      productDetails.warrantyLink = 'images/appliance-warranty.png';
       return new Appliance(productDetails);
     }
 
@@ -158,7 +160,9 @@ export function loadProducts(fun){
     .map((productDetails)=>{
     if(productDetails.type === 'clothing'){
       return new Clothing(productDetails);
-    } else if(productDetails.type === 'appliance'){
+    } else if(productDetails.keywords.includes('appliances')) {
+      productDetails.instructionsLink = 'images/appliance-instructions.png';
+      productDetails.warrantyLink = 'images/appliance-warranty.png';
       return new Appliance(productDetails);
     }
 
