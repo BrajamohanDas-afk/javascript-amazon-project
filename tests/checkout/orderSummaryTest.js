@@ -8,14 +8,18 @@ describe('test suite: renderOrderSummary', () => {
 
     
     //like beforeEach beforeAll is also a type of hook
-    beforeAll((done)=>{
-      loadProductsFetch()
-      .then(()=>{
-        //done() let us controll when to go to the next step
-        done();
-      });
-    });
+    // beforeAll((done)=>{
+    //   loadProductsFetch()
+    //   .then(()=>{
+    //     //done() let us controll when to go to the next step
+    //     done();
+    //   });
+    // });
     
+    beforeAll(async()=>{
+      await loadProductsFetch();
+    })
+
     //this is a hook it will run befour each of our test
     beforeEach(()=>{
     spyOn(localStorage, 'setItem');

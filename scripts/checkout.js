@@ -6,8 +6,7 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 // import '../data/car.js'
 // import '../data/backend-practice.js'
 import { loadProducts, loadProductsFetch } from "../data/products.js";
-import { loadCart } from "../data/cart.js";
-
+import { loadCart, loadCartFetch } from "../data/cart.js";
 
 async function loadPage(){
     //in try() we will put the code which can in future
@@ -17,14 +16,17 @@ async function loadPage(){
         //when u put throw it will directly go the catch
         //it also help us to manually throw an error
         // throw 'error1';
-    await loadProductsFetch();
-    const value = await new Promise((resolve, reject)=>{
-        // throw 'error2';
-        loadCart(()=>{
-            // reject('error3')
-            resolve('value-3');
-        });
-    })
+    // const value = await new Promise((resolve, reject)=>{
+    //     // throw 'error2';
+    //     loadCart(()=>{
+    //         // reject('error3')
+    //         resolve('value-3');
+    //     });
+    // })
+    await Promise.all([
+      loadProductsFetch(),
+      loadCartFetch()
+    ]);
     }catch(error){
         console.log('unexpected error. Please try again later'); 
     }
@@ -36,7 +38,7 @@ async function loadPage(){
 loadPage()
 
 /*
-//it let us run multiple promise al at the same time
+//it let us run multiple promise all at the same time
 //an in this promise we run all the thing at the same time
 Promise.all([
     loadProductsFetch(),
