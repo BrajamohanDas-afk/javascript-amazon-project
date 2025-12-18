@@ -23,10 +23,13 @@ async function loadPage(){
     //         resolve('value-3');
     //     });
     // })
-    await Promise.all([
+    await Promise.all ([
       loadProductsFetch(),
       loadCartFetch()
     ]);
+    // await loadProductsFetch();
+    // await loadCartFetch();
+   
     }catch(error){
         console.log('unexpected error. Please try again later'); 
     }
